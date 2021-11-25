@@ -1,3 +1,4 @@
+import util from "util";
 const {
 	SECRET_STRIPE_KEY,
 	STRIPE_WEBHOOK_SIGNATURE
@@ -228,7 +229,7 @@ export const getAllPrices = async () => {
 	}
 };
 
-export const getPrice = async priceId => {
+export const getPrice = async (priceId) => {
 	try {    
 		const price = await stripe.prices.retrieve(priceId);
 		return price;
@@ -247,10 +248,10 @@ export const webhook = async (request) => {
 			signature,
 			STRIPE_WEBHOOK_SIGNATURE
 		);
-		
+
 		const date = new Date();
 		console.log(date + ` ${event.type}:`);
-		console.log({event});
+		console.log(util.inspect(event, true, null, true));
 		console.log("");
 
 		return "ok";
@@ -297,51 +298,6 @@ export const deleteSubscription = async (subscriptionId) => {
 		throw err;
 	}
 };
-
-// const createAccount = async (type, email) => {
-//     try {
-//       const StripeAccountCreated = await stripe.accounts.create({
-//         type: type,
-//         email: email
-//       });
-//       const accountCreated = {
-//         accountId: StripeAccountCreated.id,
-//         accountType: StripeAccountCreated.type,
-//         accountEmail: StripeAccountCreated.email
-//     }
-//       return accountCreated;
-//     } catch (err) {
-//         throw err;
-//     }
-// };
-
-// const getAllAccounts = async _ => {
-//   try {
-//       const accounts = await stripe.accounts.list();
-//       return accounts;
-//   } catch (err) {
-//       throw err;
-//   }
-// };
-
-// const getAccount = async accountId => {
-//   try {
-//       const account = await stripe.accounts.retrieve(accountId);
-//       return account
-//   } catch (err) {
-//       throw err;
-//   }
-// };
-
-// const deleteAccount = async accountId => {
-//   try {
-//       const account = await stripe.accounts.del(accountId);
-//       return account;
-//   } catch (err) {
-//       throw err;
-//   }
-// };
-
 
 
 
