@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import fastifySwagger from "fastify-swagger";
-import { indexPlugin } from "./routes/index/plugin.js";
+import { stripePlugin } from "./routes/stripe/plugin.js";
 
 const app = Fastify();
 
@@ -8,12 +8,12 @@ app.register(fastifySwagger, {
     exposeRoute: true,
     routePrefix: "/docs",
     swagger: {
-        info: { title: "checksig-api" }
+        info: { title: "stripe-api" }
     },
 });
 
-app.register(indexPlugin, {
-    prefix: "/index"
+app.register(stripePlugin, {
+    prefix: "/stripe"
 });
 
 export default app;

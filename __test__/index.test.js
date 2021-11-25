@@ -3,7 +3,7 @@ import { fake } from '../libs/test/fakeHTTP.js';
 import { matchers } from 'jest-json-schema';
 expect.extend(matchers);
 
-import { getIndexOpts, postIndexOpts } from '../routes/index/schema';
+import { getIndexOpts, postIndexOpts } from '../routes/stripe/schema';
 
 const { GET, POST } = fake(app);
 
