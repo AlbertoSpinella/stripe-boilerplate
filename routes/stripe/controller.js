@@ -183,8 +183,7 @@ export const stripeGetPrice = async (req, res) => {
 
 export const stripeWebhook = async (req, res) => {
     try {
-        const { body } = req;
-        const wh = await webhook(body);
+        const wh = await webhook(req);
         return res.send({ wh });
     } catch (err) {
         throw err;

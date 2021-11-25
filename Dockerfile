@@ -4,5 +4,5 @@ COPY package.json /app
 COPY package-lock.json /app
 RUN npm ci
 COPY . /app
-CMD node server.js
+CMD node --require dotenv/config server
 EXPOSE 3000

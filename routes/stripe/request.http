@@ -3,8 +3,8 @@ POST http://localhost:3000/stripe/customer HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "prova@prova.it",
-    "lastName": "Verdi"
+    "email": "aspinella@efebia.com",
+    "lastName": "AlbertoSpinella"
 }
 
 ### getAllCustomers
@@ -26,7 +26,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/stripe/customer/cus_Kf0tRSOy9OFDEF HTTP/1.1
 
 ### addCardToCustomer
-POST http://localhost:3000/stripe/customer/cus_Kf2D2OvxeixTRH/addCard HTTP/1.1
+POST http://localhost:3000/stripe/customer/cus_Kf5g0YmN6vbHut/addCard HTTP/1.1
 Content-Type: application/json
 
 {
@@ -40,7 +40,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/stripe/customer/cus_Kf2D2OvxeixTRH/removeCard/card_1JziCJC7x5kfhxRpBs8FI9eZ HTTP/1.1
 
 ### getAllCardsOfCustomer
-GET http://localhost:3000/stripe/customer/cus_Kf2D2OvxeixTRH/cards HTTP/1.1
+GET http://localhost:3000/stripe/customer/cus_Kf4yDyFtDY2ifJ/cards HTTP/1.1
 
 ### charge
 POST http://localhost:3000/stripe/charge/cus_Kf2D2OvxeixTRH HTTP/1.1
@@ -55,7 +55,7 @@ POST http://localhost:3000/stripe/product HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Prodotto 02",
+    "name": "Prodotto by Efebia",
     "description": "fantastico"
 }
 
@@ -87,13 +87,13 @@ GET http://localhost:3000/stripe/price/all HTTP/1.1
 GET http://localhost:3000/stripe/price/price_1JzjOKC7x5kfhxRpFzlGJtSn HTTP/1.1
 
 ### createSubscription
-POST http://localhost:3000/stripe/subscription/cus_Kf2D2OvxeixTRH HTTP/1.1
+POST http://localhost:3000/stripe/subscription/cus_Kf5g0YmN6vbHut HTTP/1.1
 Content-Type: application/json
 
 {
     "items": [
         {
-            "price": "price_1Jzjk8C7x5kfhxRpu47ZxSgn"
+            "price": "price_1JzierC7x5kfhxRpyGKBjtJA"
         }
     ]
 }

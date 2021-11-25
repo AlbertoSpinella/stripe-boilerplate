@@ -225,6 +225,9 @@ export const stripeGetPriceOpts = {
 };
 
 export const stripeWebhookOpts = {
+    config: {
+        rawBody: true
+    },
     handler: stripeWebhook
 };
 

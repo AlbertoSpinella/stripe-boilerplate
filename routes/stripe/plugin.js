@@ -29,8 +29,8 @@ export const stripePlugin = (fastify, options, done) => {
         fastify.get("/customer/:customerId", stripeGetCustomerOpts);
         fastify.patch("/customer/:customerId", stripeUpdateCustomerOpts);
         fastify.delete("/customer/:customerId", stripeDeleteCustomerOpts);
-        fastify.post("/customer/:customerId/addCard", stripeAddCardToCustomerOpts);
-        fastify.delete("/customer/:customerId/removeCard/:cardId", stripeRemoveCardFromCustomerOpts);
+        fastify.post("/customer/:customerId/addCard", stripeAddCardToCustomerOpts); //frontend
+        fastify.delete("/customer/:customerId/removeCard/:cardId", stripeRemoveCardFromCustomerOpts); //frontend
         fastify.get("/customer/:customerId/cards", stripeGetAllCardsOfCustomerOpts);
 
         fastify.post("/charge/:customerId", stripeChargeOpts);

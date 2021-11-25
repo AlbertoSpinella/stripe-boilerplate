@@ -1,4 +1,7 @@
-const SECRET_STRIPE_KEY = "sk_test_51Io3mDC7x5kfhxRp8x6XRjsG3bb6qM96dSmtQaZKX6EOk70JVq0diR27auFfiMk7bSbtXxgDgpBDROvzrH8ea7ld00FexAHwe7";
+const {
+	SECRET_STRIPE_KEY,
+	STRIPE_WEBHOOK_SIGNATURE
+} = process.env;
 import Stripe from 'stripe';
 
 const stripe = new Stripe(SECRET_STRIPE_KEY, {
@@ -234,21 +237,25 @@ export const getPrice = async priceId => {
 	}
 };
 
-export const webhook = async (event) => {
+export const webhook = async (request) => {
 	try {
-		if (event.type == "payment_intent.succeeded") {
-			const paymentIntent = event.data.object;
-			console.log("payment_intent.succeeded");
-			return event;
-		}
-		if (event.type == "payment_method.attached") {
-			const paymentMethod = event.data.object;
-			console.log("payment_method.attached");
-			return event;
-		}
-		console.log(`Unhandled event type ${event.type}`);
-		return event;
+		const { rawBody, headers } = request;
+		const signature = headers["stripe-signature"];
+
+		const event = stripe.webhooks.constructEvent(
+			rawBody,
+			signature,
+			STRIPE_WEBHOOK_SIGNATURE
+		);
+		
+		const date = new Date();
+		console.log(date + ` ${event.type}:`);
+		console.log({event});
+		console.log("");
+
+		return "ok";
 	} catch (err) {
+		console.log(err);
 		throw err;
 	}
 };
