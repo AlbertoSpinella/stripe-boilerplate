@@ -2,7 +2,7 @@ name: ECR deploy CI/CD pipeline
 on:
   push:
     branches: [ master ]
-		
+
 jobs:
   deploy:
     name: Deploy
