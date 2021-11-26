@@ -7,6 +7,7 @@ import {
     stripeAddCardToCustomer,
     stripeRemoveCardFromCustomer,
     stripeGetAllCardsOfCustomer,
+    stripeGetAllPaymentMethodsOfCustomer,
     stripeCharge,
     stripeCreateProduct,
     stripeGetAllProducts,
@@ -19,7 +20,10 @@ import {
     stripeCreateSubscription,
     stripeGetAllSubscriptions,
     stripeGetSubscription,
-    stripeDeleteSubscription
+    stripeDeleteSubscription,
+    stripeGetSession,
+    stripeCreatePaymentMethod,
+    stripeGetPaymentMethod
 } from "./controller.js";
 
 const paramsCustomerId = {
@@ -54,6 +58,33 @@ const paramsSubscriptionId = {
     required: ["subscriptionId"],
     properties: {
         subscriptionId: { type: "string" }
+    },
+    additionalProperties: false
+};
+
+const paramsSessionId = {
+    type: "object",
+    required: ["sessionId"],
+    properties: {
+        sessionId: { type: "string" }
+    },
+    additionalProperties: false
+};
+
+const paramsPaymentMethodId = {
+    type: "object",
+    required: ["paymentMethodId"],
+    properties: {
+        paymentMethodId: { type: "string" }
+    },
+    additionalProperties: false
+};
+
+const paramsInvoiceId = {
+    type: "object",
+    required: ["invoiceId"],
+    properties: {
+        invoiceId: { type: "string" }
     },
     additionalProperties: false
 };
@@ -140,6 +171,13 @@ export const stripeGetAllCardsOfCustomerOpts = {
         params: paramsCustomerId
     },
     handler: stripeGetAllCardsOfCustomer
+};
+
+export const stripeGetAllPaymentMethodsOfCustomerOpts = {
+    schema:  {
+        params: paramsCustomerId
+    },
+    handler: stripeGetAllPaymentMethodsOfCustomer
 };
 
 export const stripeChargeOpts = {
@@ -271,4 +309,34 @@ export const stripeDeleteSubscriptionOpts = {
         params: paramsSubscriptionId
     },
     handler: stripeDeleteSubscription
+};
+
+export const stripeGetSessionOpts = {
+    schema:  {
+        params: paramsSessionId
+    },
+    handler: stripeGetSession
+};
+
+export const stripeCreatePaymentMethodOpts = {
+    schema:  {
+        body: {
+            type: "object",
+            required: ["type", "card"],
+            properties: {
+                type: { type: "string", enum: ["card"] },
+                card: {
+                    type: "string"
+                }
+            }
+        }
+    },
+    handler: stripeCreatePaymentMethod
+};
+
+export const stripeGetPaymentMethodOpts = {
+    schema:  {
+        params: paramsPaymentMethodId
+    },
+    handler: stripeGetPaymentMethod
 };

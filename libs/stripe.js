@@ -249,9 +249,15 @@ export const webhook = async (request) => {
 			STRIPE_WEBHOOK_SIGNATURE
 		);
 
+		if (event.type == "charge.succeeded") {
+			const receipt_url = event.data?.object?.receipt_url;
+			console.log("RECEIPT_URL", receipt_url);
+			return "ok";
+		}
+
 		const date = new Date();
 		console.log(date + ` ${event.type}:`);
-		console.log(util.inspect(event, true, null, true));
+		// console.log(util.inspect(event, true, null, true));
 		console.log("");
 
 		return "ok";
@@ -299,8 +305,6 @@ export const deleteSubscription = async (subscriptionId) => {
 	}
 };
 
-
-
 const getAllInvoices = async _ => {
 	try {    
 			const invoices = await stripe.invoices.list();
@@ -314,6 +318,50 @@ const getInvoice = async (invoiceId) => {
 	try {
 		const invoice = await stripe.invoices.retrieve(invoiceId);
 		return invoice;
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const getSession = async (sessionId) => {
+	try {
+		const session = await stripe.checkout.sessions.retrieve(sessionId);
+		// console.log(session.customer);
+		const customer = await getCustomer(session.customer);
+		console.log({customer});
+		return session;
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const createPaymentMethod = async (body) => {
+	try {
+		const pm = await stripe.paymentMethods.create(body);
+		return pm;
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const getPaymentMethod = async (paymentMethodId) => {
+	try {
+		const pm = await stripe.paymentMethods.retrieve(paymentMethodId);
+		return pm;
+	} catch (err) {
+		throw err;
+	}
+};
+
+
+export const getAllUserPaymentMethods = async (customerId) => {
+	try {
+		if (!(await customerExists(customerId))) return { error: "Given customer doesn't exists" };
+		const savedCards = await stripe.customers.listPaymentMethods(customerId, {
+			type: "card"
+		});
+		const cardDetails = Object.values(savedCards.data);
+		return cardDetails;
 	} catch (err) {
 		throw err;
 	}

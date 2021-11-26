@@ -6,6 +6,7 @@ import {
     stripeDeleteCustomerOpts,
     stripeAddCardToCustomerOpts,
     stripeRemoveCardFromCustomerOpts,
+    stripeGetAllPaymentMethodsOfCustomerOpts,
     stripeGetAllCardsOfCustomerOpts,
     stripeChargeOpts,
     stripeCreateProductOpts,
@@ -19,7 +20,10 @@ import {
     stripeCreateSubscriptionOpts,
     stripeGetAllSubscriptionsOpts,
     stripeGetSubscriptionOpts,
-    stripeDeleteSubscriptionOpts
+    stripeDeleteSubscriptionOpts,
+    stripeGetSessionOpts,
+    stripeCreatePaymentMethodOpts,
+    stripeGetPaymentMethodOpts
 } from "./schema.js";
 
 export const stripePlugin = (fastify, options, done) => {
@@ -31,6 +35,7 @@ export const stripePlugin = (fastify, options, done) => {
         fastify.delete("/customer/:customerId", stripeDeleteCustomerOpts);
         fastify.post("/customer/:customerId/addCard", stripeAddCardToCustomerOpts); //frontend
         fastify.delete("/customer/:customerId/removeCard/:cardId", stripeRemoveCardFromCustomerOpts); //frontend
+        fastify.get("/customer/:customerId/paymentMethods", stripeGetAllPaymentMethodsOfCustomerOpts);
         fastify.get("/customer/:customerId/cards", stripeGetAllCardsOfCustomerOpts);
 
         fastify.post("/charge/:customerId", stripeChargeOpts);
@@ -50,6 +55,12 @@ export const stripePlugin = (fastify, options, done) => {
         fastify.delete("/subscription/:subscriptionId", stripeDeleteSubscriptionOpts);
 
         fastify.post("/webhook", stripeWebhookOpts);
+
+        fastify.get("/session/:sessionId", stripeGetSessionOpts);
+
+        fastify.post("/paymentMethod", stripeCreatePaymentMethodOpts);
+        fastify.get("/paymentMethod/:paymentMethodId", stripeGetPaymentMethodOpts);
+
 
         done();
     } catch (err) {

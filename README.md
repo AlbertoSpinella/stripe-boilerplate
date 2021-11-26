@@ -29,5 +29,7 @@
     - `payment_intent.succeeded`
 - Subscription delete:
     - `customer.subscription.deleted`
-- Subscription AUTO renewal:
-    - ``
+- Subscription AUTO renewal (invoice not confirmed):
+    - `invoice.created`, with billing_reason: subscription_cycle
+    - `customer.subscription.updated`
+    - More incoming

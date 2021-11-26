@@ -7,6 +7,7 @@ import {
     addNewCardToCustomer,
     deleteCardFromCustomer,
     getAllUserCards,
+    getAllUserPaymentMethods,
     chargeCustomer,
     createProduct,
     getAllProducts,
@@ -19,7 +20,10 @@ import {
     createSubscription,
     getAllSubscriptions,
     getSubscription,
-    deleteSubscription
+    deleteSubscription,
+    getSession,
+    createPaymentMethod,
+    getPaymentMethod
 } from "../../libs/stripe.js";
 
 export const stripeCreateCustomer = async (req, res) => {
@@ -101,6 +105,16 @@ export const stripeGetAllCardsOfCustomer = async (req, res) => {
     }
 };
 
+export const stripeGetAllPaymentMethodsOfCustomer = async (req, res) => {
+    try {
+        const { params: { customerId } } = req;
+        const pm = await getAllUserPaymentMethods(customerId);
+        return res.send({ pm });
+    } catch (err) {
+        throw err;
+    }
+};
+
 export const stripeCharge = async (req, res) => {
     try {
         const { params: { customerId }, body } = req;
@@ -163,8 +177,7 @@ export const stripeCreatePrice = async (req, res) => {
 
 export const stripeGetAllPrices = async (req, res) => {
     try {
-        const { body } = req;
-        const prices = await getAllPrices(body);
+        const prices = await getAllPrices();
         return res.send({ prices });
     } catch (err) {
         throw err;
@@ -224,6 +237,36 @@ export const stripeDeleteSubscription = async (req, res) => {
         const { params: { subscriptionId } } = req;
         const subscription = await deleteSubscription(subscriptionId);
         return res.send({ subscription });
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const stripeGetSession = async (req, res) => {
+    try {
+        const { params: { sessionId } } = req;
+        const session = await getSession(sessionId);
+        return res.send({ session });
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const stripeCreatePaymentMethod = async (req, res) => {
+    try {
+        const { body } = req;
+        const paymentMethod = await createPaymentMethod(body);
+        return res.send({ paymentMethod });
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const stripeGetPaymentMethod = async (req, res) => {
+    try {
+        const { params: { paymentMethodId } } = req;
+        const paymentMethod = await getPaymentMethod(paymentMethodId);
+        return res.send({ paymentMethod });
     } catch (err) {
         throw err;
     }

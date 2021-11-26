@@ -3,8 +3,8 @@ POST http://localhost:3000/stripe/customer HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "mario@mario.com",
-    "lastName": "MM"
+    "email": "aspinella@efebia.com",
+    "lastName": "aspinella"
 }
 
 ### getAllCustomers
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### deleteCustomer
-DELETE http://localhost:3000/stripe/customer/cus_Kf8MORZJAl2vo8 HTTP/1.1
+DELETE http://localhost:3000/stripe/customer/cus_KfV9zkyByiJBd1 HTTP/1.1
 
 ### addCardToCustomer
 POST http://localhost:3000/stripe/customer/cus_Kf9jS6ksP4OkHa/addCard HTTP/1.1
@@ -40,7 +40,10 @@ Content-Type: application/json
 DELETE http://localhost:3000/stripe/customer/cus_Kf6qPVWF3DjEDd/removeCard/card_1JzmcVC7x5kfhxRpfowFjVlU HTTP/1.1
 
 ### getAllCardsOfCustomer
-GET http://localhost:3000/stripe/customer/cus_Kf7vctcuM6mfjI/cards HTTP/1.1
+GET http://localhost:3000/stripe/customer/cus_KfVBRK1nPEmgt2/cards HTTP/1.1
+
+### getAllUserPaymentMethods
+GET http://localhost:3000/stripe/customer/cus_KfVBRK1nPEmgt2/paymentMethods HTTP/1.1
 
 ### charge
 POST http://localhost:3000/stripe/charge/cus_Kf2D2OvxeixTRH HTTP/1.1
@@ -102,7 +105,25 @@ Content-Type: application/json
 GET http://localhost:3000/stripe/subscription/all HTTP/1.1
 
 ### getSubscription
-GET http://localhost:3000/stripe/subscription/sub_1JzkFrC7x5kfhxRpsfU7uPOe HTTP/1.1
+GET http://localhost:3000/stripe/subscription/sub_1K00J8C7x5kfhxRpEnuxxqB2 HTTP/1.1
 
 ### deleteSubscription
 DELETE http://localhost:3000/stripe/subscription/sub_1JzkjpC7x5kfhxRpjEQZWhFg HTTP/1.1
+
+### sendInvoice
+POST http://localhost:3000/stripe/sendInvoice/in_1JzplIC7x5kfhxRpcJliYW4p HTTP/1.1
+
+### getSession
+GET http://localhost:3000/stripe/session/cs_test_a1fDuEGgF4EG8nnEa6DFcqxLQofipHdgVAedeGuWlQsfVm7jzl2zLoJKaK HTTP/1.1
+
+### createPaymentMethod
+POST http://localhost:3000/stripe/paymentMethod HTTP/1.1
+Content-Type: application/json
+
+{
+    "type": "card",
+    "card": ""
+}
+
+### getPaymentMethod
+GET http://localhost:3000/stripe/paymentMethod/pm_1K00J7C7x5kfhxRp4z6itWrA HTTP/1.1
