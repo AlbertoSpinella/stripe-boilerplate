@@ -21,7 +21,7 @@ import {
     stripeGetAllSubscriptions,
     stripeGetSubscription,
     stripeDeleteSubscription,
-    stripeGetSession,
+    stripeVerifySession,
     stripeCreatePaymentMethod,
     stripeGetPaymentMethod
 } from "./controller.js";
@@ -188,9 +188,9 @@ export const stripeChargeOpts = {
             required: ["amount"],
             properties: {
                 amount: { type: "number" }
-            }
-        },
-        additionalProperties: false
+            },
+            additionalProperties: false
+        }
     },
     handler: stripeCharge
 };
@@ -311,11 +311,11 @@ export const stripeDeleteSubscriptionOpts = {
     handler: stripeDeleteSubscription
 };
 
-export const stripeGetSessionOpts = {
+export const stripeVerifySessionOpts = {
     schema:  {
         params: paramsSessionId
     },
-    handler: stripeGetSession
+    handler: stripeVerifySession
 };
 
 export const stripeCreatePaymentMethodOpts = {

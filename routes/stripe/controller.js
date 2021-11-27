@@ -21,7 +21,7 @@ import {
     getAllSubscriptions,
     getSubscription,
     deleteSubscription,
-    getSession,
+    verifySession,
     createPaymentMethod,
     getPaymentMethod
 } from "../../libs/stripe.js";
@@ -242,10 +242,10 @@ export const stripeDeleteSubscription = async (req, res) => {
     }
 };
 
-export const stripeGetSession = async (req, res) => {
+export const stripeVerifySession = async (req, res) => {
     try {
         const { params: { sessionId } } = req;
-        const session = await getSession(sessionId);
+        const session = await verifySession(sessionId);
         return res.send({ session });
     } catch (err) {
         throw err;

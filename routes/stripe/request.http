@@ -114,7 +114,10 @@ DELETE http://localhost:3000/stripe/subscription/sub_1JzkjpC7x5kfhxRpjEQZWhFg HT
 POST http://localhost:3000/stripe/sendInvoice/in_1JzplIC7x5kfhxRpcJliYW4p HTTP/1.1
 
 ### getSession
-GET http://localhost:3000/stripe/session/cs_test_a1fDuEGgF4EG8nnEa6DFcqxLQofipHdgVAedeGuWlQsfVm7jzl2zLoJKaK HTTP/1.1
+GET http://localhost:3000/stripe/session/cs_test_a1D4f9oEinlMLcXX9ngbQS4VsQcvSsSaiAFkXVa9SZs64KqUdQxnqWTFH0 HTTP/1.1
+
+### verifySession
+GET http://localhost:3000/stripe/verifySession/cs_test_a1fDuEGgF4EG8nnEa6DFcqxLQofipHdgVAedeGuWlQsfVm7jzl2zLoJKaK HTTP/1.1
 
 ### createPaymentMethod
 POST http://localhost:3000/stripe/paymentMethod HTTP/1.1

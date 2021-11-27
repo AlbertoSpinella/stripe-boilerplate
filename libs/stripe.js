@@ -251,13 +251,12 @@ export const webhook = async (request) => {
 
 		if (event.type == "charge.succeeded") {
 			const receipt_url = event.data?.object?.receipt_url;
-			console.log("RECEIPT_URL", receipt_url);
-			return "ok";
+			console.log("RECEIPT_URL", receipt_url, event.type);
 		}
 
 		const date = new Date();
 		console.log(date + ` ${event.type}:`);
-		// console.log(util.inspect(event, true, null, true));
+		console.log(util.inspect(event, true, null, true));
 		console.log("");
 
 		return "ok";
@@ -323,13 +322,12 @@ const getInvoice = async (invoiceId) => {
 	}
 };
 
-export const getSession = async (sessionId) => {
+export const verifySession = async (sessionId) => {
 	try {
 		const session = await stripe.checkout.sessions.retrieve(sessionId);
-		// console.log(session.customer);
-		const customer = await getCustomer(session.customer);
-		console.log({customer});
-		return session;
+		if (session.status == "complete" && session.payment_status == "paid")
+			return true;
+		return false;
 	} catch (err) {
 		throw err;
 	}

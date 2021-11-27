@@ -21,7 +21,7 @@ import {
     stripeGetAllSubscriptionsOpts,
     stripeGetSubscriptionOpts,
     stripeDeleteSubscriptionOpts,
-    stripeGetSessionOpts,
+    stripeVerifySessionOpts,
     stripeCreatePaymentMethodOpts,
     stripeGetPaymentMethodOpts
 } from "./schema.js";
@@ -56,7 +56,7 @@ export const stripePlugin = (fastify, options, done) => {
 
         fastify.post("/webhook", stripeWebhookOpts);
 
-        fastify.get("/session/:sessionId", stripeGetSessionOpts);
+        fastify.get("/verifySession/:sessionId", stripeVerifySessionOpts);
 
         fastify.post("/paymentMethod", stripeCreatePaymentMethodOpts);
         fastify.get("/paymentMethod/:paymentMethodId", stripeGetPaymentMethodOpts);
