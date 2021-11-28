@@ -20,6 +20,7 @@ import {
     stripeCreateSubscriptionOpts,
     stripeGetAllSubscriptionsOpts,
     stripeGetSubscriptionOpts,
+    stripeDeleteSubscriptionAtEndOpts,
     stripeDeleteSubscriptionOpts,
     stripeVerifySessionOpts,
     stripeCreatePaymentMethodOpts,
@@ -52,6 +53,7 @@ export const stripePlugin = (fastify, options, done) => {
         fastify.post("/subscription/:customerId", stripeCreateSubscriptionOpts);
         fastify.get("/subscription/all", stripeGetAllSubscriptionsOpts);
         fastify.get("/subscription/:subscriptionId", stripeGetSubscriptionOpts);
+        fastify.delete("/subscriptionAtEnd/:subscriptionId", stripeDeleteSubscriptionAtEndOpts);
         fastify.delete("/subscription/:subscriptionId", stripeDeleteSubscriptionOpts);
 
         fastify.post("/webhook", stripeWebhookOpts);

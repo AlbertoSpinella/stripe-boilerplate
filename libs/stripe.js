@@ -295,6 +295,15 @@ export const getSubscription = async (subId) => {
 	}
 };
 
+export const deleteSubscriptionAtEnd = async (subscriptionId) => {
+	try {    
+		const deleted = await stripe.subscriptions.update(subscriptionId, { cancel_at_period_end: true });
+		return deleted;
+	} catch (err) {
+		throw err;
+	}
+};
+
 export const deleteSubscription = async (subscriptionId) => {
 	try {    
 		const deleted = await stripe.subscriptions.del(subscriptionId);

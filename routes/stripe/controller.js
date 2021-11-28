@@ -20,6 +20,7 @@ import {
     createSubscription,
     getAllSubscriptions,
     getSubscription,
+    deleteSubscriptionAtEnd,
     deleteSubscription,
     verifySession,
     createPaymentMethod,
@@ -231,6 +232,16 @@ export const stripeGetSubscription = async (req, res) => {
         throw err;
     }
 };
+
+export const stripeDeleteSubscriptionAtEnd = async (req, res) => {
+    try {
+        const { params: { subscriptionId } } = req;
+        const subscription = await deleteSubscriptionAtEnd(subscriptionId);
+        return res.send({ subscription });
+    } catch (err) {
+        throw err;
+    }
+};;
 
 export const stripeDeleteSubscription = async (req, res) => {
     try {

@@ -105,10 +105,13 @@ Content-Type: application/json
 GET http://localhost:3000/stripe/subscription/all HTTP/1.1
 
 ### getSubscription
-GET http://localhost:3000/stripe/subscription/sub_1K00J8C7x5kfhxRpEnuxxqB2 HTTP/1.1
+GET http://localhost:3000/stripe/subscription/sub_1JzkFrC7x5kfhxRpsfU7uPOe HTTP/1.1
+
+### deleteSubscriptionAtEnd
+DELETE http://localhost:3000/stripe/subscriptionAtEnd/sub_1K0RqDC7x5kfhxRpLgXbiM3K HTTP/1.1
 
 ### deleteSubscription
-DELETE http://localhost:3000/stripe/subscription/sub_1JzkjpC7x5kfhxRpjEQZWhFg HTTP/1.1
+DELETE http://localhost:3000/stripe/subscription/sub_1K0RqDC7x5kfhxRpLgXbiM3K HTTP/1.1
 
 ### sendInvoice
 POST http://localhost:3000/stripe/sendInvoice/in_1JzplIC7x5kfhxRpcJliYW4p HTTP/1.1

@@ -20,6 +20,7 @@ import {
     stripeCreateSubscription,
     stripeGetAllSubscriptions,
     stripeGetSubscription,
+    stripeDeleteSubscriptionAtEnd,
     stripeDeleteSubscription,
     stripeVerifySession,
     stripeCreatePaymentMethod,
@@ -302,6 +303,13 @@ export const stripeGetSubscriptionOpts = {
         params: paramsSubscriptionId
     },
     handler: stripeGetSubscription
+};
+
+export const stripeDeleteSubscriptionAtEndOpts = {
+    schema:  {
+        params: paramsSubscriptionId
+    },
+    handler: stripeDeleteSubscriptionAtEnd
 };
 
 export const stripeDeleteSubscriptionOpts = {
